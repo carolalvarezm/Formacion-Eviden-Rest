@@ -1,0 +1,466 @@
+openapi: "3.0.2"
+info:
+  title: API EJEMPLO SWAGGER
+  version: "1.0"
+servers:
+  - url: "https://api.ejemploSwagger/v1"
+    description: "Esta api implementa el ejemplo para el uso de SWAGGER"
+tags:
+  - name: projects
+    description: Este endpoint maneja todo lo referente a los proyectos.
+paths:
+  /projects:
+    get:
+      tags:
+      - projects
+      summary: Obtiene todos los proyectos.
+      responses:
+        200:
+          description: (Ok) Se ha devuelto correctamente.
+          content: 
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/proyectos'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/ServerError'
+      responseBody:
+    post:
+      tags:
+      - projects
+      summary: Añade un proyecto.
+      requestBody:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/proyectos'
+              required: true
+      responses:
+        200:
+          description: (Ok) Se ha devuelto correctamente.
+          content: 
+            aplication/json:
+              schema:
+                $ref: '#/components/schemas/proyectos'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/ServerError'
+  
+  /projects/{idProyecto}:
+      get:
+        tags:
+        - projects
+        summary: Obtiene un proyecto mediante su id.
+        parameters:
+        - $ref: '#/components/parameters/idProyecto'
+        responses:
+          200:
+            description: (Ok) Se ha devuelto correctamente.
+            content: 
+              aplication/json:
+                schema:
+                  $ref: '#/components/schemas/proyectos'
+          401:
+            $ref: '#/components/responses/Unauthorized'
+          404:
+            $ref: '#/components/responses/NotFound'
+          500:
+            $ref: '#/components/responses/ServerError'
+      put:
+          tags:
+            - projects
+          summary: Obtiene un proyecto mediante su id.
+          parameters:
+          - $ref: '#/components/parameters/idProyecto'
+          requestBody:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/proyectos'
+              required: true
+          responses:
+            200:
+              description: (Ok) Se ha modificado correctamente.
+              content: 
+                aplication/json:
+                  schema:
+                    $ref: '#/components/schemas/proyectos'
+            401:
+              $ref: '#/components/responses/Unauthorized'
+            404:
+              $ref: '#/components/responses/NotFound'
+            500:
+              $ref: '#/components/responses/ServerError'
+      delete:
+          tags:
+            - projects
+          summary: Elimina un proyecto según su id
+          parameters:
+          - $ref: '#/components/parameters/idProyecto'
+          responses:
+            200:
+              description: (Ok) Se ha eliminado correctamente.
+            401:
+              $ref: '#/components/responses/Unauthorized'
+            404:
+              $ref: '#/components/responses/NotFound'
+            500:
+              $ref: '#/components/responses/ServerError'
+  /projects/{idProyecto}/codes:
+    get:
+        tags:
+        - projects
+        summary: Obtiene los códigos de un proyecto
+        parameters:
+        - $ref: '#/components/parameters/idProyecto'
+        responses:
+          200:
+            description: (Ok) Se ha devuelto correctamente.
+            content: 
+              aplication/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/code'
+          401:
+            $ref: '#/components/responses/Unauthorized'
+          404:
+            $ref: '#/components/responses/NotFound'
+          500:
+            $ref: '#/components/responses/ServerError'
+    post:
+      tags:
+      - projects
+      summary: Añade un código.
+      parameters:
+        - $ref: '#/components/parameters/idProyecto'
+      requestBody:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/code'
+              required: true
+      responses:
+        200:
+          description: (Ok) Se ha devuelto correctamente.
+          content: 
+            aplication/json:
+              schema:
+                $ref: '#/components/schemas/code'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/ServerError'
+  /projects/{idProyecto}/codes/{idCodigo}:
+      get:
+        tags:
+        - projects
+        summary: Obtiene un código de un proyecto.
+        parameters:
+        - $ref: '#/components/parameters/idProyecto'
+        - $ref: '#/components/parameters/idCodigo'
+        responses:
+          200:
+            description: (Ok) Se ha devuelto correctamente.
+            content: 
+              aplication/json:
+                schema:
+                  $ref: '#/components/schemas/code'
+          401:
+            $ref: '#/components/responses/Unauthorized'
+          404:
+            $ref: '#/components/responses/NotFound'
+          500:
+            $ref: '#/components/responses/ServerError'
+      put:
+          tags:
+            - projects
+          summary: Modifica un código de un proyecto.
+          parameters:
+          - $ref: '#/components/parameters/idProyecto'
+          - $ref: '#/components/parameters/idCodigo'
+          requestBody:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/code'
+              required: true
+          responses:
+            200:
+              description: (Ok) Se ha modificado correctamente.
+              content: 
+                aplication/json:
+                  schema:
+                    $ref: '#/components/schemas/code'
+            401:
+              $ref: '#/components/responses/Unauthorized'
+            404:
+              $ref: '#/components/responses/NotFound'
+            500:
+              $ref: '#/components/responses/ServerError'
+      delete:
+          tags:
+            - projects
+          summary: Elimina un código según su id.
+          parameters:
+          - $ref: '#/components/parameters/idProyecto'
+          - $ref: '#/components/parameters/idCodigo'
+          responses:
+            200:
+              description: (Ok) Se ha eliminado correctamente.
+            401:
+              $ref: '#/components/responses/Unauthorized'
+            404:
+              $ref: '#/components/responses/NotFound'
+            500:
+              $ref: '#/components/responses/ServerError' 
+  /projects/{idProyecto}/details:
+    get:
+        tags:
+        - projects
+        summary: Obtiene los detalles de un proyecto
+        parameters:
+        - $ref: '#/components/parameters/idProyecto'
+        responses:
+          200:
+            description: (Ok) Se ha devuelto correctamente.
+            content: 
+              aplication/json:
+                schema:
+                    $ref: '#/components/schemas/detail'
+          401:
+            $ref: '#/components/responses/Unauthorized'
+          404:
+            $ref: '#/components/responses/NotFound'
+          500:
+            $ref: '#/components/responses/ServerError'
+    post:
+      tags:
+      - projects
+      summary: Añade los detalles al proyecto.
+      requestBody:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/detail'
+              required: true
+      parameters:
+        - $ref: '#/components/parameters/idProyecto'
+      responses:
+        200:
+          description: (Ok) Se ha devuelto correctamente.
+          content: 
+            aplication/json:
+              schema:
+                $ref: '#/components/schemas/detail'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/ServerError'  
+      put:
+          tags:
+            - projects
+          summary: Modifica los detalles de un proyecto.
+          parameters:
+          - $ref: '#/components/parameters/idProyecto'
+          requestBody:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/detail'
+              required: true
+          responses:
+            200:
+              description: (Ok) Se ha modificado correctamente.
+              content: 
+                aplication/json:
+                  schema:
+                    $ref: '#/components/schemas/detail'
+            401:
+              $ref: '#/components/responses/Unauthorized'
+            404:
+              $ref: '#/components/responses/NotFound'
+            500:
+              $ref: '#/components/responses/ServerError'
+      delete:
+          tags:
+            - projects
+          summary: Elimina los detalles de un proyecto.
+          parameters:
+          - $ref: '#/components/parameters/idProyecto'
+          responses:
+            200:
+              description: (Ok) Se ha eliminado correctamente.
+            401:
+              $ref: '#/components/responses/Unauthorized'
+            404:
+              $ref: '#/components/responses/NotFound'
+            500:
+              $ref: '#/components/responses/ServerError' 
+  /tags:
+  /users:
+  /blogs:
+  /articles:
+     
+components:
+    responses:
+      Unauthorized:
+        description: (Unauthorized) no tiene autorización para acceder a este recurso.
+      NotFound: 
+        description: (NotFound) no se ha encontrado el recurso solicitado.
+      BadRequest: 
+        description: (BadRequest) hay errores en la petición del recurso.
+      ServerError:
+        description: (ServerError) error con el servidor.
+    parameters:
+      idProyecto:
+        in: header
+        description: identificación del proyecto.
+        required: true
+      idCodigo:
+        in: header
+        description: identificación del código.
+        required: true
+    schemas:
+        proyectos:
+          type: object
+          properties:
+             id:
+               type: integer
+               description: Identificador del proyecto.
+               enum: [235]
+             description:
+               type: string 
+               description: Descripción del proyecto.
+               enum: ["Proyecto de ejemplo de documentación"]
+             language: 
+               type: string
+               description: Lenguaje del proyecto.
+               enum: ["ES"]
+             open:
+               type: boolean 
+               description: Indica si el proyecto está abierto.
+               enum: [False]
+        code:
+          type: object
+          properties:
+            id:
+              type: integer
+              description: Identificador del código
+              enum: [144]
+            package:
+              type: string
+              description: Paquete del código.
+              enum: ["es.a926666"]
+            file:
+              type: "string"
+              description: Fichero del código
+              enum: ["programa.package"]
+        detail:
+          type: object
+          properties: 
+            date: 
+              type: array
+              items:
+               type: datatime
+              description: Fechas del proyecto
+              enum: ["16-04-2023","17-04-2024"]
+            content:
+              type: string
+              description: Contenido del proyecto
+              enum: ["Contenido del proyecto"]
+            type: 
+             type: string
+             description: Tipo del proyecto
+             enum: ["Un tipo"]
+            budget:
+              type: float
+              description: Presupuesto del proyecto
+              enum: [1750.89]
+        user:
+          type: object
+          properties: 
+            id: 
+              type: integer
+              description: Identificador del usuario.
+              enum: [0]
+            nick: 
+              type: string
+              description: Nombre de usuario del usuario.
+              enum: ["user1234"] 
+            name:
+              type: string
+              description: Nombre del usuario
+              enum: ["Pedro Rodríguez"]
+        phone: 
+          type: object
+          properties:
+            value:
+              type: string
+              description: Valor del número de teléfono
+              enum: ["631342123"]
+            type:
+              type: string
+              description: Tipo de teléfono
+              enum: ["Móvil"]
+        tag:
+          type: object
+          properties:
+            id:
+              type: integer
+              description: Identificador de la etiqueta.
+              enum: [0]
+            label:
+              type: string
+              description: Valor de la etiqueta.
+              enum: ["etiqueta"]
+            date: 
+             type: datatime
+             description: Fecha de la etiqueta.
+             enum: ["16-04-2023"]
+        blog:
+          type: object
+          properties:
+            id:
+              type: integer
+              description: Identificador de la entrada de blog.
+              enum: [0]
+            title:
+              type: string
+              description: Título de la entrada de blog.
+              enum: ["Spring Blog"]
+            date: 
+             type: datatime
+             description: Fecha del blog.
+             enum: ["16-04-2023"]
+        article:
+          type: object
+          properties:
+            id:
+              type: integer
+              description: Identificador del artículo.
+              enum: [0]
+            title:
+              type: string
+              description: Título del artículo.
+              enum: ["Artícúlo 1: ¿Qué es Spring?"]             
+            abstract:
+              type: string
+              description: Resumen del artículo.
+              enum: ["Resumen del artículo"]
+            content:
+              type: string
+              description: Contenido del artículo.
+              enum: ["Contenido del artículo"]         
