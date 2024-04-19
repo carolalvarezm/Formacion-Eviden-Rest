@@ -1,4 +1,4 @@
-package es.a926666.EjemploOpenAPI;
+package es.a926666.ProyectoconJWT;
 
 /**
  * Hello world!
