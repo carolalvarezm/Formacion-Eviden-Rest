@@ -53,7 +53,7 @@ public class AuthService {
 	
 	public ResponseEntity<?> register(RegisterRequest request) {
 		User user = new User(request.getUsername(),passwordEncoder.encode(request.getPassword()),request.getName(),request.getLastname(),request.getEmail(),Role.User);
-		if (userService.addUser(user)==null) {
+		if (userService.addUser(user)!=null) {
 			return ResponseEntity.ok(new AuthResponse(jwtService.getToken(user)));
 		}
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("El usuario ya se encuentra registrado");

@@ -21,7 +21,7 @@ public class AuthController {
 	//Devolvemos la respuesta del Login
 	@PostMapping(value = "login")
 	public ResponseEntity<?> login(@RequestBody LoginRequest request) {
-		return ResponseEntity.ok(authService.login(request));
+		return authService.login(request);
 	}
 
 	//Devolvemos la respuesta del Register
